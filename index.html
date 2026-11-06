@@ -1,0 +1,1751 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width,initial-scale=1">
+
+<title>
+منشئ مواعيد اللقاءات الحية
+</title>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap"
+rel="stylesheet">
+
+<style>
+
+:root{
+
+--primary:#0F766E;
+--primary-light:#14B8A6;
+
+--background:#F4F8F9;
+
+--card:#FFFFFF;
+
+--danger:#DC2626;
+
+--text:#0F172A;
+
+--secondary:#64748B;
+
+--shadow:
+0 4px 12px rgba(0,0,0,.08);
+
+}
+
+*{
+
+margin:0;
+padding:0;
+box-sizing:border-box;
+
+font-family:'Cairo',sans-serif;
+
+}
+
+body{
+
+background:var(--background);
+color:var(--text);
+
+padding-bottom:90px;
+
+}
+
+header{
+
+background:linear-gradient(
+135deg,
+var(--primary),
+var(--primary-light)
+);
+
+color:white;
+
+padding:24px;
+
+font-size:22px;
+
+font-weight:700;
+
+text-align:center;
+
+box-shadow:var(--shadow);
+
+}
+
+.page{
+
+display:none;
+
+padding:16px;
+
+}
+
+.page.active{
+
+display:block;
+
+}
+
+.card{
+
+background:var(--card);
+
+border-radius:18px;
+
+padding:18px;
+
+margin-bottom:16px;
+
+box-shadow:var(--shadow);
+
+}
+
+.card-title{
+
+font-size:18px;
+
+font-weight:700;
+
+margin-bottom:12px;
+
+}
+
+input,
+select,
+textarea{
+
+width:100%;
+
+padding:14px;
+
+border-radius:12px;
+
+border:1px solid #d9e2e7;
+
+margin-top:8px;
+
+margin-bottom:12px;
+
+font-size:15px;
+
+outline:none;
+
+}
+
+textarea{
+
+min-height:120px;
+
+resize:vertical;
+
+}
+
+button{
+
+width:100%;
+
+border:none;
+
+border-radius:12px;
+
+padding:14px;
+
+cursor:pointer;
+
+font-size:15px;
+
+font-weight:700;
+
+margin-top:8px;
+
+}
+
+.btn-primary{
+
+background:var(--primary);
+
+color:white;
+
+}
+
+.btn-danger{
+
+background:var(--danger);
+
+color:white;
+
+}
+
+.btn-secondary{
+
+background:#EEF2F7;
+
+color:#111827;
+
+}
+
+.menu-btn{
+
+margin-bottom:12px;
+
+}
+
+.group-item{
+
+background:#F8FAFC;
+
+border-radius:12px;
+
+padding:12px;
+
+margin-bottom:10px;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+}
+
+.group-name{
+
+font-weight:700;
+
+}
+
+.group-actions{
+
+display:flex;
+
+gap:8px;
+
+}
+
+.group-actions button{
+
+width:auto;
+
+padding:8px 12px;
+
+margin:0;
+
+}
+
+.output{
+
+white-space:pre-wrap;
+
+line-height:2;
+
+font-size:15px;
+
+background:#ECFEFF;
+
+padding:16px;
+
+border-radius:12px;
+
+}
+
+.bottom-nav{
+
+position:fixed;
+
+bottom:0;
+
+right:0;
+
+left:0;
+
+background:white;
+
+display:flex;
+
+border-top:1px solid #E2E8F0;
+
+box-shadow:
+0 -4px 8px rgba(0,0,0,.06);
+
+}
+
+.bottom-nav button{
+
+background:white;
+
+border-radius:0;
+
+margin:0;
+
+padding:14px;
+
+font-size:13px;
+
+}
+
+.city-row{
+
+background:#F8FAFC;
+
+padding:12px;
+
+border-radius:10px;
+
+margin-top:8px;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+}
+
+.clock-row{
+
+background:#F8FAFC;
+
+padding:14px;
+
+border-radius:12px;
+
+margin-bottom:10px;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+}
+
+.clock-city{
+
+font-weight:600;
+
+}
+
+.clock-time{
+
+font-size:18px;
+
+font-weight:700;
+
+color:var(--primary);
+
+}
+
+.badge{
+
+background:#E6FFFA;
+
+color:#0F766E;
+
+padding:6px 10px;
+
+border-radius:50px;
+
+font-size:12px;
+
+display:inline-block;
+
+margin-top:8px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+🌍 منشئ مواعيد اللقاءات الحية
+
+</header>
+
+<!-- الرئيسية -->
+
+<section
+id="homePage"
+class="page active">
+
+<div class="card">
+
+<div class="card-title">
+
+أهلاً بك
+
+</div>
+
+<button
+class="btn-primary menu-btn"
+onclick="showPage('messagePage')">
+
+إنشاء رسالة
+
+</button>
+
+<button
+class="btn-primary menu-btn"
+onclick="showPage('groupsPage')">
+
+إدارة المجموعات
+
+</button>
+
+<button
+class="btn-primary menu-btn"
+onclick="showPage('worldClockPage')">
+
+الساعات العالمية
+
+</button>
+
+</div>
+
+</section>
+
+<!-- المجموعات -->
+
+<section
+id="groupsPage"
+class="page">
+
+<div class="card">
+
+<div class="card-title">
+
+إضافة مجموعة
+
+</div>
+
+<input
+id="newGroupName"
+placeholder="مثال: طلاب الإحصاء">
+
+<button
+class="btn-primary"
+onclick="addGroup()">
+
+إضافة مجموعة
+
+</button>
+
+</div>
+
+<div class="card">
+
+<div class="card-title">
+
+المجموعات
+
+</div>
+
+<div id="groupsList">
+
+</div>
+
+</div>
+
+</section>
+
+<!-- الرسالة -->
+
+<section
+id="messagePage"
+class="page">
+
+<div class="card">
+
+<div class="card-title">
+
+بيانات اللقاء
+
+</div>
+
+<select id="messageGroup">
+
+</select>
+
+<input
+id="subjectName"
+placeholder="اسم المادة">
+
+<div class="card-title">
+
+تواريخ اللقاءات
+
+</div>
+
+<input
+type="date"
+id="newMeetingDate">
+
+<button
+class="btn-secondary"
+onclick="addMeetingDate()">
+
+إضافة تاريخ
+
+</button>
+
+<div id="meetingDatesList">
+
+</div>
+
+<input
+type="time"
+id="meetingTime"
+value="18:00">
+
+<select
+id="referenceTimezone">
+
+</select>
+
+<button
+class="btn-primary">
+
+إنشاء الرسالة
+
+</button>
+
+</div>
+
+<div class="card">
+
+<div class="card-title">
+
+الناتج
+
+</div>
+
+<div
+id="messageOutput"
+class="output">
+
+سيظهر النص هنا
+
+</div>
+
+</div>
+
+</section>
+
+<!-- الساعات -->
+
+<section
+id="worldClockPage"
+class="page">
+
+<div class="card">
+
+<div class="card-title">
+
+الوقت الحالي
+
+</div>
+
+<div
+id="clockContainer">
+
+</div>
+
+</div>
+
+</section>
+
+<!-- تنقل سفلي -->
+
+<div class="bottom-nav">
+
+<button
+onclick="showPage('homePage')">
+
+🏠 الرئيسية
+
+</button>
+
+<button
+onclick="showPage('groupsPage')">
+
+👥 المجموعات
+
+</button>
+
+<button
+onclick="showPage('messagePage')">
+
+📝 رسالة
+
+</button>
+
+<button
+onclick="showPage('worldClockPage')">
+
+🕒 الوقت
+
+</button>
+
+</div>
+
+<script>
+
+function showPage(id){
+
+document
+.querySelectorAll(".page")
+.forEach(page=>{
+
+page.classList.remove("active");
+
+});
+
+document
+.getElementById(id)
+.classList.add("active");
+
+}
+
+let groups=
+JSON.parse(
+localStorage.getItem("groups")
+|| "{}"
+);
+
+
+// ===============================
+// قاعدة المدن
+// ===============================
+
+const TIMEZONES = [
+
+{ id:"Africa/Cairo",name:"🇪🇬 القاهرة - مصر" },
+{ id:"Africa/Tunis",name:"🇹🇳 تونس - تونس" },
+{ id:"Africa/Casablanca",name:"🇲🇦 الدار البيضاء - المغرب" },
+{ id:"Africa/Algiers",name:"🇩🇿 الجزائر - الجزائر" },
+{ id:"Africa/Nouakchott",name:"🇲🇷 نواكشوط - موريتانيا" },
+{ id:"Africa/Tripoli",name:"🇱🇾 طرابلس - ليبيا" },
+{ id:"Africa/Khartoum",name:"🇸🇩 الخرطوم - السودان" },
+
+{ id:"Asia/Riyadh",name:"🇸🇦 الرياض - السعودية" },
+{ id:"Asia/Dubai",name:"🇦🇪 دبي - الإمارات" },
+{ id:"Asia/Kuwait",name:"🇰🇼 الكويت - الكويت" },
+{ id:"Asia/Qatar",name:"🇶🇦 الدوحة - قطر" },
+{ id:"Asia/Bahrain",name:"🇧🇭 المنامة - البحرين" },
+{ id:"Asia/Muscat",name:"🇴🇲 مسقط - عمان" },
+
+{ id:"Asia/Amman",name:"🇯🇴 عمان - الأردن" },
+{ id:"Asia/Beirut",name:"🇱🇧 بيروت - لبنان" },
+{ id:"Asia/Damascus",name:"🇸🇾 دمشق - سوريا" },
+{ id:"Asia/Baghdad",name:"🇮🇶 بغداد - العراق" },
+{ id:"Asia/Jerusalem",name:"🇵🇸 القدس - فلسطين" },
+{ id:"Asia/Aden",name:"🇾🇪 صنعاء - اليمن" },
+
+{ id:"Europe/Istanbul",name:"🇹🇷 إسطنبول - تركيا" },
+{ id:"Europe/London",name:"🇬🇧 لندن - بريطانيا" },
+{ id:"Europe/Paris",name:"🇫🇷 باريس - فرنسا" },
+{ id:"Europe/Berlin",name:"🇩🇪 برلين - ألمانيا" },
+{ id:"Europe/Rome",name:"🇮🇹 روما - إيطاليا" },
+{ id:"Europe/Madrid",name:"🇪🇸 مدريد - إسبانيا" },
+
+{ id:"Asia/Karachi",name:"🇵🇰 كراتشي - باكستان" },
+{ id:"Asia/Kolkata",name:"🇮🇳 نيودلهي - الهند" },
+{ id:"Asia/Dhaka",name:"🇧🇩 دكا - بنجلاديش" },
+{ id:"Asia/Kuala_Lumpur",name:"🇲🇾 كوالالمبور - ماليزيا" },
+{ id:"Asia/Jakarta",name:"🇮🇩 جاكرتا - إندونيسيا" },
+
+{ id:"America/New_York",name:"🇺🇸 نيويورك - أمريكا" },
+{ id:"America/Chicago",name:"🇺🇸 شيكاغو - أمريكا" },
+{ id:"America/Denver",name:"🇺🇸 دنفر - أمريكا" },
+{ id:"America/Los_Angeles",name:"🇺🇸 كاليفورنيا / لوس أنجلوس - أمريكا" },
+{ id:"America/New_Jersey",name:"🇺🇸 نيوجيرسي - أمريكا" },
+
+{ id:"America/Toronto",name:"🇨🇦 تورونتو - كندا" },
+{ id:"America/Montreal",name:"🇨🇦 مونتريال - كندا" },
+{ id:"America/Winnipeg",name:"🇨🇦 مانيتوبا / وينيبيغ - كندا" },
+{ id:"America/Edmonton",name:"🇨🇦 كالجاري - كندا" },
+{ id:"America/Vancouver",name:"🇨🇦 فانكوفر - كندا" },
+
+{ id:"Australia/Sydney",name:"🇦🇺 سيدني - أستراليا" },
+{ id:"Australia/Perth",name:"🇦🇺 بيرث - أستراليا" }
+
+];
+
+// ===============================
+// عرض المجموعات
+// ===============================
+
+function saveGroups(){
+
+localStorage.setItem(
+"groups",
+JSON.stringify(groups)
+);
+
+}
+
+
+function addGroup(){
+
+const name=
+document
+.getElementById(
+"newGroupName"
+)
+.value
+.trim();
+
+if(!name) return;
+
+if(groups[name]){
+
+alert("المجموعة موجودة بالفعل");
+
+return;
+
+}
+
+groups[name]=[];
+
+document
+.getElementById(
+"newGroupName"
+)
+.value="";
+
+saveGroups();
+renderGroups();
+
+}
+
+function deleteGroup(name){
+
+if(
+!confirm(
+`حذف ${name} ؟`
+)
+) return;
+
+delete groups[name];
+
+saveGroups();
+renderGroups();
+
+}
+
+function renameGroup(name){
+
+const newName =
+prompt(
+"اسم المجموعة الجديد",
+name
+);
+
+if(
+!newName ||
+newName===name
+) return;
+
+groups[newName] =
+groups[name];
+
+delete groups[name];
+
+saveGroups();
+renderGroups();
+
+}
+
+function renderGroups(){
+
+const list=
+document
+.getElementById(
+"groupsList"
+);
+
+const msgSelect=
+document
+.getElementById(
+"messageGroup"
+);
+
+list.innerHTML="";
+
+msgSelect.innerHTML="";
+
+Object.keys(groups)
+.forEach(name=>{
+
+list.innerHTML+=`
+
+<div class="group-item">
+
+<div>
+
+<div class="group-name">
+${name}
+</div>
+
+<div class="badge">
+
+${groups[name].length}
+ مدينة
+
+</div>
+
+</div>
+
+<div
+class="group-actions">
+
+<button
+class="btn-secondary"
+onclick="openGroup('${name}')">
+
+فتح
+
+</button>
+
+<button
+class="btn-secondary"
+onclick="renameGroup('${name}')">
+
+تعديل
+
+</button>
+
+<button
+class="btn-danger"
+onclick="deleteGroup('${name}')">
+
+حذف
+
+</button>
+
+</div>
+
+</div>
+
+`;
+
+msgSelect.innerHTML+=`
+<option value="${name}">
+${name}
+</option>
+`;
+
+});
+
+loadReferenceCities();
+
+}
+
+// ===============================
+// صفحة المجموعة
+// ===============================
+
+let currentGroup=null;
+
+function openGroup(name){
+
+currentGroup = name;
+
+document
+.getElementById(
+"groupsList"
+)
+.innerHTML = `
+
+<div class="card">
+
+    <div class="card-title">
+
+        ${name}
+
+    </div>
+
+    <h3 style="margin-bottom:12px">
+        المدن الموجودة
+    </h3>
+
+    <div id="groupCities">
+
+    </div>
+
+    <hr style="
+    margin-top:20px;
+    margin-bottom:20px;">
+
+    <h3 style="margin-bottom:12px">
+        إضافة مدينة
+    </h3>
+
+    <input
+    id="citySearch"
+    placeholder="ابحث عن مدينة..."
+    onkeyup="renderCitySearch()">
+
+    <div id="searchResults">
+
+    </div>
+
+</div>
+
+`;
+
+renderCitySearch();
+
+renderGroupCities();
+
+}
+
+function renderCitySearch(){
+
+const q=
+document
+.getElementById(
+"citySearch"
+)
+.value
+.toLowerCase();
+
+const results=
+document
+.getElementById(
+"searchResults"
+);
+
+results.innerHTML="";
+
+TIMEZONES
+.filter(city=>
+city.name
+.toLowerCase()
+.includes(q)
+)
+.slice(0,20)
+.forEach(city=>{
+
+results.innerHTML+=`
+
+<div class="city-row">
+
+<span>
+
+${city.name}
+
+</span>
+
+<button
+class="btn-primary"
+style="
+width:auto;
+padding:8px 12px"
+onclick="
+addCity(
+'${city.id}'
+)">
+
+إضافة
+
+</button>
+
+</div>
+
+`;
+
+});
+
+}
+
+function addCity(cityId){
+
+if(
+!groups[currentGroup]
+.includes(cityId)
+){
+
+groups[currentGroup]
+.push(cityId);
+
+saveGroups();
+
+renderGroupCities();
+
+renderClocks();
+
+}
+
+}
+
+function removeCity(cityId){
+
+groups[currentGroup]=
+groups[currentGroup]
+.filter(
+c=>c!==cityId
+);
+
+saveGroups();
+
+renderGroupCities();
+
+renderClocks();
+
+}
+
+function renderGroupCities(){
+
+
+console.log(
+"Current Group:",
+currentGroup
+);
+
+console.log(
+"Cities:",
+groups[currentGroup]
+);
+
+const div=
+document.getElementById(
+"groupCities"
+);
+
+if(!div) return;
+
+if(
+groups[currentGroup].length===0
+){
+
+div.innerHTML = `
+<div class="badge">
+لا توجد مدن في هذه المجموعة
+</div>
+`;
+
+return;
+
+}
+
+div.innerHTML="";
+
+groups[currentGroup]
+.forEach(cityId=>{
+
+const city=
+TIMEZONES.find(
+x=>x.id===cityId
+);
+
+if(!city) return;
+
+div.innerHTML+=`
+
+<div class="city-row">
+
+<span>
+
+${city.name}
+
+</span>
+
+<button
+class="btn-danger"
+style="
+width:auto;
+padding:8px 12px"
+onclick="
+removeCity(
+'${cityId}'
+)">
+
+حذف
+
+</button>
+
+</div>
+
+`;
+
+});
+
+}
+
+// ===============================
+// المدن المرجعية
+// ===============================
+
+function loadReferenceCities(){
+
+const group=
+document
+.getElementById(
+"messageGroup"
+)
+.value;
+
+const ref=
+document
+.getElementById(
+"referenceTimezone"
+);
+
+if(!ref) return;
+
+ref.innerHTML="";
+
+if(!groups[group])
+return;
+
+groups[group]
+.forEach(cityId=>{
+
+const city=
+TIMEZONES.find(
+x=>x.id===cityId
+);
+
+if(!city)
+return;
+
+ref.innerHTML+=`
+<option
+value="${city.id}">
+${city.name}
+</option>
+`;
+
+});
+
+}
+
+document
+.getElementById(
+"messageGroup"
+)
+.addEventListener(
+"change",
+loadReferenceCities
+);
+
+renderGroups();
+
+
+// =====================================
+// الساعات العالمية
+// =====================================
+function renderClocks(){
+
+console.log(
+"GROUPS:",
+JSON.stringify(groups,null,2)
+);
+
+function realTimezone(id){
+
+    if(id === "America/New_Jersey")
+        return "America/New_York";
+
+    return id;
+}
+
+    const container =
+    document.getElementById(
+        "clockContainer"
+    );
+
+    if(!container) return;
+
+    const usedCities =
+    [...new Set(
+        Object.values(groups)
+        .flat()
+    )];
+
+    usedCities.sort();
+
+    container.innerHTML = "";
+
+    usedCities.forEach(id=>{
+
+        const city =
+        TIMEZONES.find(
+            x=>x.id===id
+        );
+
+        if(!city) return;
+
+       let time = "--:--";
+
+try{
+
+    time =
+    new Date()
+    .toLocaleTimeString(
+        "ar-EG",
+        {
+            timeZone:realTimezone(id),
+            hour:"2-digit",
+            minute:"2-digit"
+        }
+    );
+
+}
+catch(error){
+
+    console.error(
+        "Invalid timezone:",
+        id
+    );
+
+}
+
+        container.innerHTML += `
+
+        <div class="clock-row">
+
+            <div class="clock-city">
+                ${city.name}
+            </div>
+
+            <div class="clock-time">
+                ${time}
+            </div>
+
+        </div>
+
+        `;
+
+    });
+
+}
+
+setInterval(
+renderClocks,
+60000
+);
+
+renderClocks();
+
+
+// =====================================
+// تنسيق الوقت
+// =====================================
+
+function formatTime(
+date,
+timezone
+){
+
+return new Intl.DateTimeFormat(
+'ar-EG',
+{
+timeZone:timezone,
+hour:'numeric',
+minute:'2-digit',
+hour12:true
+}
+).format(date);
+
+}
+
+
+// =====================================
+// إنشاء الرسالة
+// =====================================
+
+document
+.querySelector(
+"#messagePage .btn-primary"
+)
+.addEventListener(
+"click",
+generateMessage
+);
+
+function generateMessage(){
+
+const groupName=
+document
+.getElementById(
+"messageGroup"
+)
+.value;
+
+if(
+!groupName ||
+!groups[groupName]
+){
+alert("اختر المجموعة");
+return;
+}
+
+const subject=
+document
+.getElementById(
+"subjectName"
+)
+.value
+.trim();
+
+
+if(
+meetingDates.length===0
+){
+
+alert(
+"برجاء إضافة تاريخ لقاء واحد على الأقل"
+);
+
+return;
+
+}
+
+const dates =
+meetingDates
+.map(date => {
+
+return new Date(date)
+.toLocaleDateString(
+'ar-EG',
+{
+day:'numeric',
+month:'long'
+}
+);
+
+})
+.join('\n');
+
+
+const time=
+document
+.getElementById(
+"meetingTime"
+)
+.value;
+
+const referenceZone=
+document
+.getElementById(
+"referenceTimezone"
+)
+.value;
+
+if(
+!subject ||
+!time
+){
+
+alert(
+"أكمل جميع البيانات"
+);
+
+return;
+
+}
+
+const [hour,minute]
+=
+time
+.split(":")
+.map(Number);
+
+const meeting =
+new Date(
+meetingDates[0]
+);
+
+meeting.setHours(
+hour,
+minute,
+0,
+0
+);
+
+const referenceCity =
+TIMEZONES.find(
+x=>x.id===referenceZone
+);
+
+let message =
+
+`صباح/مساء الخير،
+
+موعد اللقاءات الحية لمادة ${subject} سيكون بالتواريخ التالية:
+
+${dates}
+
+التوقيت:
+
+${referenceCity.name}: ${formatTime(meeting,referenceZone)}
+
+`;
+
+message +=
+`التوقيت المقابل للدول الأخرى:
+
+`;
+
+groups[groupName]
+.forEach(cityId=>{
+
+if(
+cityId===referenceZone
+) return;
+
+const city=
+TIMEZONES.find(
+x=>x.id===cityId
+);
+
+const localTime =
+formatTime(
+meeting,
+cityId
+);
+
+message +=
+
+`${city.name}: ${localTime}
+
+`;
+
+});
+
+message +=
+
+`شكراً لكم.`;
+
+document
+.getElementById(
+"messageOutput"
+)
+.innerText =
+message;
+
+checkDST();
+
+}
+
+
+// =====================================
+// نسخ الرسالة
+// =====================================
+
+function copyMessage(){
+
+const text=
+document
+.getElementById(
+"messageOutput"
+)
+.innerText;
+
+navigator
+.clipboard
+.writeText(
+text
+);
+
+alert(
+"تم نسخ الرسالة"
+);
+
+}
+
+
+// =====================================
+// واتساب
+// =====================================
+
+function shareWhatsApp(){
+
+const text=
+document
+.getElementById(
+"messageOutput"
+)
+.innerText;
+
+window.open(
+
+"https://wa.me/?text=" +
+encodeURIComponent(text)
+
+);
+
+}
+
+
+// =====================================
+// أزرار النسخ والواتساب
+// =====================================
+
+const outputCard =
+document
+.querySelector(
+"#messageOutput"
+)
+.parentElement;
+
+outputCard.innerHTML += `
+
+<button
+class="btn-primary"
+onclick="copyMessage()">
+
+نسخ الرسالة
+
+</button>
+
+<button
+class="btn-secondary"
+onclick="shareWhatsApp()">
+
+مشاركة على واتساب
+
+</button>
+
+`;
+
+
+// =====================================
+// كشف تغيير DST
+// =====================================
+
+function checkDST(){
+
+const groupName=
+document
+.getElementById(
+"messageGroup"
+)
+.value;
+if(
+meetingDates.length===0
+){
+return;
+}
+
+const startDate =
+new Date(
+meetingDates[0]
+);
+
+if(
+!groups[groupName]
+) return;
+
+let warning = false;
+
+groups[groupName]
+.forEach(zone=>{
+
+const jan=
+new Date(
+startDate.getFullYear(),
+0,
+1
+);
+
+const jul=
+new Date(
+startDate.getFullYear(),
+6,
+1
+);
+
+const janOffset=
+getOffset(
+zone,
+jan
+);
+
+const julOffset=
+getOffset(
+zone,
+jul
+);
+
+if(
+janOffset !==
+julOffset
+){
+
+warning=true;
+
+}
+
+});
+
+if(warning){
+
+setTimeout(()=>{
+
+alert(
+
+"تنبيه:\n\nبعض المدن في هذه المجموعة تعمل بنظام التوقيت الصيفي (DST).\n\nيرجى مراجعة المواعيد إذا كانت اللقاءات تمتد لفترة طويلة."
+
+);
+
+},300);
+
+}
+
+}
+
+function getOffset(
+timeZone,
+date
+){
+
+const parts =
+new Intl.DateTimeFormat(
+'en-US',
+{
+timeZone,
+timeZoneName:'longOffset'
+}
+)
+.formatToParts(
+date
+);
+
+const tz=
+parts.find(
+x=>
+x.type===
+'timeZoneName'
+);
+
+return tz
+?
+tz.value
+:
+'';
+
+}
+
+
+// تحميل أولي
+
+renderGroups();
+loadReferenceCities();
+renderClocks();
+
+let meetingDates=[];
+
+function addMeetingDate(){
+
+const value=
+document
+.getElementById(
+"newMeetingDate"
+)
+.value;
+
+if(!value)
+return;
+
+if(
+!meetingDates.includes(value)
+){
+
+meetingDates.push(value);
+
+renderMeetingDates();
+
+}
+
+document
+.getElementById(
+"newMeetingDate"
+)
+.value="";
+}
+
+function removeMeetingDate(date){
+
+meetingDates=
+meetingDates.filter(
+d=>d!==date
+);
+
+renderMeetingDates();
+
+}
+
+function renderMeetingDates(){
+
+const div=
+document
+.getElementById(
+"meetingDatesList"
+);
+
+div.innerHTML="";
+
+meetingDates
+.sort()
+.forEach(date=>{
+
+const d=
+new Date(date);
+
+const text=
+d.toLocaleDateString(
+'ar-EG',
+{
+day:'numeric',
+month:'long'
+}
+);
+
+div.innerHTML+=`
+
+<div class="city-row">
+
+<span>
+
+${text}
+
+</span>
+
+<button
+class="btn-danger"
+style="width:auto"
+onclick="
+removeMeetingDate(
+'${date}'
+)">
+
+حذف
+
+</button>
+
+</div>
+
+`;
+
+});
+
+}
+
+</script>
+
+</body>
+</html>
