@@ -1250,18 +1250,20 @@ date,
 timezone
 ){
 
-return new Intl.DateTimeFormat(
-'ar-EG',
-{
-timeZone:timezone,
-hour:'numeric',
-minute:'2-digit',
-hour12:true
-}
-).format(date);
+    return new Intl.DateTimeFormat(
+        "ar-EG",
+        {
+            timeZone:
+                realTimezone(
+                    timezone
+                ),
+            hour: "numeric",
+            minute: "2-digit",
+            hour12: true
+        }
+    ).format(date);
 
 }
-
 
 // =====================================
 // إنشاء الرسالة
@@ -1275,6 +1277,73 @@ document
 "click",
 generateMessage
 );
+
+function realTimezone(id){
+
+    if(id === "America/New_Jersey"){
+        return "America/New_York";
+    }
+
+    return id;
+}
+
+function getUtcTimestampFromLocalTime(
+    dateString,
+    timeString,
+    timeZone
+){
+
+    const [year, month, day] =
+        dateString.split("-").map(Number);
+
+    const [hour, minute] =
+        timeString.split(":").map(Number);
+
+    const utcGuess = Date.UTC(
+        year,
+        month - 1,
+        day,
+        hour,
+        minute
+    );
+
+    const formatter =
+        new Intl.DateTimeFormat(
+            "en-US",
+            {
+                timeZone: realTimezone(timeZone),
+                year: "numeric",
+                month: "2-digit",
+                day: "2-digit",
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit",
+                hour12: false
+            }
+        );
+
+    const parts =
+        formatter.formatToParts(
+            new Date(utcGuess)
+        );
+
+    const values = {};
+
+    parts.forEach(p=>{
+        values[p.type] = p.value;
+    });
+
+    const asUTC =
+        Date.UTC(
+            Number(values.year),
+            Number(values.month) - 1,
+            Number(values.day),
+            Number(values.hour),
+            Number(values.minute)
+        );
+
+    return utcGuess - (asUTC - utcGuess);
+}
 
 function generateMessage(){
 
@@ -1364,17 +1433,15 @@ time
 .split(":")
 .map(Number);
 
-const meeting =
-new Date(
-meetingDates[0]
+const utcTimestamp =
+getUtcTimestampFromLocalTime(
+    meetingDates[0],
+    time,
+    referenceZone
 );
 
-meeting.setHours(
-hour,
-minute,
-0,
-0
-);
+const meeting =
+new Date(utcTimestamp);
 
 const referenceCity =
 TIMEZONES.find(
